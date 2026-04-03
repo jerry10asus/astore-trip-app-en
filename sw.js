@@ -1,4 +1,4 @@
-const APP_VERSION = 'v0.1.11';
+const APP_VERSION = 'v1.0';
 const APP_SHELL_CACHE = `astore-shell-${APP_VERSION}`;
 const DATA_CACHE = `astore-data-${APP_VERSION}`;
 

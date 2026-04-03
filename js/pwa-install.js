@@ -1,6 +1,7 @@
 /**
  * PWA 安装引导 Bottom Sheet 系统
- * 根据浏览器类型显示不同的安装指引
+ * 优先侦测 Instagram / Threads 等社群 App 内置浏览器，引导用外部浏览器开启；
+ * 否则依浏览器类型显示对应安装指引。
  */
 
 (function() {
@@ -38,6 +39,20 @@
     }
 
     return true;
+  }
+
+  /**
+   * 社群 App 内置浏览器（IG、Threads、Facebook 等 WebView）：无法像系统 Safari/Chrome 一样安装 PWA
+   */
+  function detectSocialInAppBrowser() {
+    const ua = navigator.userAgent || '';
+    if (!ua) return false;
+    if (/Instagram/i.test(ua)) return true;
+    if (/Threads/i.test(ua)) return true;
+    // Meta Threads 部分版本 UA 会带内部代号
+    if (/Barcelona/i.test(ua)) return true;
+    if (/FB_IAB|FBAN|FBAV|FB4A|FBIOS/i.test(ua)) return true;
+    return false;
   }
 
   /**
@@ -129,6 +144,13 @@
         title: 'Add AStore Trip to your Home Screen for the best experience.',
         steps: [
           'Use your browser’s menu and look for “Add to Home screen” to install.'
+        ]
+      },
+      'in-app-social': {
+        title: 'Please open this page in your external browser.',
+        steps: [
+          'Tap “⋯” or “⋮” in the top-right corner.',
+          'Choose “Open in Browser”, “Open in Safari”, or a similar option.'
         ]
       }
     };
@@ -232,9 +254,9 @@
       return;
     }
 
-    // 检测浏览器类型
-    const browserType = detectBrowser();
-    console.log('检测到浏览器类型:', browserType);
+    // 社群内置浏览器优先 → 引导外部浏览器；否则按系统浏览器显示 PWA 安装说明
+    const browserType = detectSocialInAppBrowser() ? 'in-app-social' : detectBrowser();
+    console.log('检测到浏览器类型:', browserType, detectSocialInAppBrowser() ? '(social in-app)' : '');
 
     // 获取对应文案
     const content = getInstallContent(browserType);
@@ -273,7 +295,8 @@
   window.PWAInstall = {
     show: showInstallSheet,
     hide: hideInstallSheet,
-    init: initInstallPrompt
+    init: initInstallPrompt,
+    detectSocialInApp: detectSocialInAppBrowser
   };
 })();
 

@@ -1792,6 +1792,14 @@
   flex-shrink: 0;
 }
 
+.link-icon .link-icon-app {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  object-fit: cover;
+  display: block;
+}
+
 .link-content {
   flex: 1;
 }
