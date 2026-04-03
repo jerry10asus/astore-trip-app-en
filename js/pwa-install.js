@@ -1,57 +1,78 @@
 /**
- * PWA 安装引导 Bottom Sheet 系统
- * 优先侦测 Instagram / Threads 等社群 App 内置浏览器，引导用外部浏览器开启；
- * 否则依浏览器类型显示对应安装指引。
+ * PWA install bottom sheet: in-app browsers (IG, Threads, etc.) → open in external browser first.
+ * Social in-app always eligible (ignores 24h dismiss); normal browsers use 24h dismiss after close.
  */
 
 (function() {
   'use strict';
 
-  // 检查是否应该显示安装提示
   function shouldShowInstallPrompt() {
-    // 1. 检查是否为 PWA 模式
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                         window.navigator.standalone === true ||
                         document.referrer.includes('android-app://');
-    
+
     if (isStandalone) {
-      console.log('PWA 模式，不显示安装提示');
+      console.log('PWA standalone — skip install prompt');
       return false;
     }
 
-    // 2. 检查是否在 24 小时内关闭过
+    if (window.innerWidth >= 1024) {
+      console.log('Desktop width — skip install prompt');
+      return false;
+    }
+
+    // In-app social: show every visit; do not let a prior Safari/Chrome dismiss block this
+    if (isSocialInAppBrowser()) {
+      console.log('Social in-app browser — show external-browser guidance');
+      return true;
+    }
+
     const dismissedAt = localStorage.getItem('installPromptDismissedAt');
     if (dismissedAt) {
       const dismissedTime = parseInt(dismissedAt, 10);
       const now = Date.now();
       const hours24 = 24 * 60 * 60 * 1000;
-      
+
       if (now - dismissedTime < hours24) {
-        console.log('24 小时内已关闭过，不显示安装提示');
+        console.log('Dismissed within 24h — skip install prompt');
         return false;
       }
-    }
-
-    // 3. 检查是否为桌面设备（宽度 >= 1024px）
-    if (window.innerWidth >= 1024) {
-      console.log('桌面设备，不显示安装提示');
-      return false;
     }
 
     return true;
   }
 
   /**
-   * 社群 App 内置浏览器（IG、Threads、Facebook 等 WebView）：无法像系统 Safari/Chrome 一样安装 PWA
+   * 社群／通訊 App 內建瀏覽器（無法像系統 Safari/Chrome 一樣安裝 PWA）
+   * IG/Threads 在 iOS 上常偽裝成一般 Safari UA，需搭配 referrer、WebView 特徵判斷。
    */
-  function detectSocialInAppBrowser() {
+  function isSocialInAppBrowser() {
     const ua = navigator.userAgent || '';
-    if (!ua) return false;
+
     if (/Instagram/i.test(ua)) return true;
     if (/Threads/i.test(ua)) return true;
-    // Meta Threads 部分版本 UA 会带内部代号
     if (/Barcelona/i.test(ua)) return true;
-    if (/FB_IAB|FBAN|FBAV|FB4A|FBIOS/i.test(ua)) return true;
+    if (/FBAN|FBAV|FB_IAB|FB4A|FBIOS/i.test(ua)) return true;
+    if (/Line\//i.test(ua)) return true;
+    if (/TikTok/i.test(ua) || /musical_ly/i.test(ua)) return true;
+    if (/Snapchat/i.test(ua)) return true;
+    if (/WhatsApp/i.test(ua)) return true;
+    if (/\bTwitter\b/i.test(ua)) return true;
+
+    // 從社群連結進入時，document.referrer 常可辨識（即使 UA 沒有 App 名稱）
+    const ref = document.referrer || '';
+    if (ref && /https?:\/\/([\w-]+\.)*(instagram\.com|instagr\.am|threads\.(net|com)|facebook\.com|fb\.me|l\.facebook\.com|lm\.facebook\.com|l\.instagram\.com|twitter\.com|x\.com|tiktok\.com|line\.me|snapchat\.com|whatsapp\.com|wa\.me)(\/|$)/i.test(ref)) {
+      return true;
+    }
+
+    // Android System WebView（多數 App 內開連結）：UA 常含 "; wv)" 或單獨的 wv 片段
+    if (/android/i.test(ua) && /\bwv\b|\bwv\)/i.test(ua)) return true;
+
+    // iOS：系統 Safari UA 通常含 Version/x.x；許多 App 內 WKWebView 省略 Version 但仍有 Mobile/
+    if (/(iPhone|iPad|iPod)/i.test(ua) && !/CriOS|FxiOS|EdgiOS/i.test(ua) && /AppleWebKit/i.test(ua)) {
+      if (/Mobile\//i.test(ua) && !/Version\/[\d.]+/i.test(ua)) return true;
+    }
+
     return false;
   }
 
@@ -108,6 +129,13 @@
    */
   function getInstallContent(browserType) {
     const contents = {
+      'in-app-social': {
+        title: 'Please open this page in your external browser.',
+        steps: [
+          'Tap “⋯” or “⋮” in the top-right corner.',
+          'Choose “Open in Browser”, “Open in Safari”, or a similar option.'
+        ]
+      },
       'ios-safari-new': {
         title: 'Add AStore Trip to your Home Screen for the best experience.',
         steps: [
@@ -145,13 +173,6 @@
         steps: [
           'Use your browser’s menu and look for “Add to Home screen” to install.'
         ]
-      },
-      'in-app-social': {
-        title: 'Please open this page in your external browser.',
-        steps: [
-          'Tap “⋯” or “⋮” in the top-right corner.',
-          'Choose “Open in Browser”, “Open in Safari”, or a similar option.'
-        ]
       }
     };
 
@@ -159,10 +180,10 @@
   }
 
   /**
-   * 创建 Bottom Sheet HTML
+   * @param {object} content
+   * @param {string} [installType] e.g. 'in-app-social' — closing does not set 24h dismiss
    */
-  function createInstallBottomSheet(content) {
-    // 检查是否已存在
+  function createInstallBottomSheet(content, installType) {
     if (document.getElementById('pwa-install-sheet')) {
       return;
     }
@@ -170,6 +191,9 @@
     const sheet = document.createElement('div');
     sheet.id = 'pwa-install-sheet';
     sheet.className = 'pwa-install-sheet';
+    if (installType) {
+      sheet.dataset.installType = installType;
+    }
     
     const stepsHTML = content.steps.map((step, index) => {
       // 处理包含图标的步骤文本
@@ -210,7 +234,10 @@
 
     const closeSheet = () => {
       hideInstallSheet();
-      // 记录关闭时间
+      const sheetEl = document.getElementById('pwa-install-sheet');
+      if (sheetEl && sheetEl.dataset.installType === 'in-app-social') {
+        return;
+      }
       localStorage.setItem('installPromptDismissedAt', Date.now().toString());
     };
 
@@ -254,15 +281,11 @@
       return;
     }
 
-    // 社群内置浏览器优先 → 引导外部浏览器；否则按系统浏览器显示 PWA 安装说明
-    const browserType = detectSocialInAppBrowser() ? 'in-app-social' : detectBrowser();
-    console.log('检测到浏览器类型:', browserType, detectSocialInAppBrowser() ? '(social in-app)' : '');
+    const browserType = isSocialInAppBrowser() ? 'in-app-social' : detectBrowser();
+    console.log('PWA install prompt type:', browserType);
 
-    // 获取对应文案
     const content = getInstallContent(browserType);
-
-    // 创建并显示 Bottom Sheet
-    createInstallBottomSheet(content);
+    createInstallBottomSheet(content, browserType);
     
     // 延迟显示，确保 DOM 已渲染
     setTimeout(() => {
@@ -295,8 +318,7 @@
   window.PWAInstall = {
     show: showInstallSheet,
     hide: hideInstallSheet,
-    init: initInstallPrompt,
-    detectSocialInApp: detectSocialInAppBrowser
+    init: initInstallPrompt
   };
 })();
 
