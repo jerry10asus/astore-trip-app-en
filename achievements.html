@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AStore Trip" />
+  <title>AStore Trip - Achievements</title>
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/glass.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pwa-update.css" />
+  <link rel="stylesheet" href="./css/pwa-install.css" />
+</head>
+<body>
+  <div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+  <div class="achievement-sheet" id="achievementSheet">
+    <div class="sheet-header">
+      <div class="sheet-handle"></div>
+      <h1 class="sheet-title">Achievements</h1>
+      <button class="sheet-close-btn" id="sheetCloseBtn" aria-label="Close">
+        <span class="close-icon">✕</span>
+      </button>
+    </div>
+
+    <main class="achievements-main">
+      <section class="achievement-summary">
+        <div class="summary-cards">
+          <div class="summary-card">
+            <div class="summary-icon">
+              <img src="./assets/icon/Checkin.svg" alt="Stores visited" />
+            </div>
+            <div class="summary-number-row">
+              <div class="summary-card__number highlight-blue" id="achVisitedCount">3</div>
+              <div class="summary-card__divider">/</div>
+              <div class="summary-card__total">535</div>
+            </div>
+            <div class="summary-card__label">Stores visited</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon">
+              <img src="./assets/icon/Achievement.svg" alt="Badges earned" />
+            </div>
+            <div class="summary-card__number highlight-orange" id="achBadgeCount">2</div>
+            <div class="summary-card__label">Badges earned</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="historical-achievements">
+        <h2 class="section-title">Badge history</h2>
+        <div class="country-flags-grid" id="countryFlagsGrid">
+          <div class="medals-loading" id="medalsLoading">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading…</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/achievements.js"></script>
+  <script src="./js/pwa-update.js"></script>
+  <script src="./js/pwa-install.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sheet = document.getElementById('achievementSheet');
+      const backdrop = document.getElementById('sheetBackdrop');
+      const closeBtn = document.getElementById('sheetCloseBtn');
+
+      setTimeout(() => {
+        sheet.classList.add('show');
+        backdrop.classList.add('show');
+      }, 10);
+
+      function closeSheet() {
+        sheet.classList.remove('show');
+        backdrop.classList.remove('show');
+        setTimeout(() => {
+          window.history.back();
+        }, 300);
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeSheet);
+      }
+
+      if (backdrop) {
+        backdrop.addEventListener('click', closeSheet);
+      }
+
+      if (window.AchievementsPage) {
+        window.AchievementsPage.init();
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered:', reg))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AStore Trip" />
+  <title>AStore Trip - About</title>
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/glass.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pwa-update.css" />
+  <link rel="stylesheet" href="./css/pwa-install.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="page-header">
+    <a class="back-btn" href="./index.html" aria-label="Back">
+      <img src="./assets/icon/arrow_left.svg" alt="Back" class="back-icon" />
+    </a>
+    <h1 class="page-title" style="flex: 1; text-align: center;">About</h1>
+    <div style="width: 40px;"></div>
+  </header>
+
+  <main class="about-main">
+    <section class="about-section">
+      <h2 class="about-title">About AStore Trip</h2>
+      <div class="about-content">
+        <p>AStore Trip is a travel and collection app built for people who love Apple’s design language.</p>
+        <p>I made it because I believe every Apple retail store is a space where the company’s aesthetic shines as much as the products on display.</p>
+        <p>As a designer, I love visiting Apple Stores when I travel—taking in the architecture, materials, and how each one fits its city. Every location feels like a conversation between Apple and local culture, and a reminder that design is the experience. AStore Trip is meant to be a companion for anyone who feels the same way about Apple’s spaces.</p>
+        <p>With this app you can:</p>
+        <ul class="about-features">
+          <li> Browse Apple Store locations worldwide with names, regions, building notes, and hours</li>
+          <li>❤️ Save stores you’ve visited or want to visit and build your own Apple travel map</li>
+          <li>🏅 Earn visit achievements and badges for every store you check in to</li>
+        </ul>
+        <p>AStore Trip isn’t only a utility—it’s a way to connect travel, design, and what Apple stands for.</p>
+      </div>
+    </section>
+
+    <section class="about-links">
+      <a href="https://instagram.com/jerry10jerry10" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">🙋🏻‍♂️</div>
+        <div class="link-content">
+          <h3 class="link-title">Find me on Instagram</h3>
+        </div>
+        <div class="link-arrow">›</div>
+      </a>
+      <a href="https://instagram.com/astore_trip" target="_blank" rel="noopener" class="link-card" style="display: none;">
+        <div class="link-icon">📱</div>
+        <div class="link-content">
+          <h3 class="link-title">Follow AStore Trip on Instagram</h3>
+        </div>
+        <div class="link-arrow">›</div>
+      </a>
+      <a href="https://buymeacoffee.com/jerryjhang" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">☕</div>
+        <div class="link-content">
+          <h3 class="link-title">Buy me a coffee</h3>
+        </div>
+        <div class="link-arrow">›</div>
+      </a>
+      <a href="https://forms.gle/gA3AZcMZrPBkQu5i9" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">💬</div>
+        <div class="link-content">
+          <h3 class="link-title">Send feedback</h3>
+        </div>
+        <div class="link-arrow">›</div>
+      </a>
+    </section>
+  </main>
+
+  <div class="app-version" id="appVersion"></div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/pwa-update.js"></script>
+  <script src="./js/pwa-install.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered:', reg))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+    async function displayVersion() {
+      try {
+        const response = await fetch('./sw.js');
+        const text = await response.text();
+        const versionMatch = text.match(/const APP_VERSION = ['"]([^'"]+)['"]/);
+        if (versionMatch && versionMatch[1]) {
+          const versionEl = document.getElementById('appVersion');
+          if (versionEl) {
+            versionEl.textContent = versionMatch[1];
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load version:', error);
+        const versionEl = document.getElementById('appVersion');
+        if (versionEl) {
+          versionEl.textContent = 'v0.1.11';
+        }
+      }
+    }
+
+    displayVersion();
+  </script>
+</body>
+</html>

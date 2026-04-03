@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AStore Trip" />
+  <title>AStore Trip - Store</title>
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/glass.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pwa-update.css" />
+  <link rel="stylesheet" href="./css/pwa-install.css" />
+</head>
+<body>
+  <header class="store-header">
+    <a class="back-btn" href="./stores.html" aria-label="Back">
+      <img src="./assets/icon/arrow_left.svg" alt="Back" class="back-icon" />
+    </a>
+    <button class="favorite-header-btn" id="headerFavoriteBtn" aria-label="Favorite">
+      <img src="./assets/icon/favorites.svg" alt="Favorite" class="favorite-icon" id="headerFavoriteIcon" />
+    </button>
+  </header>
+
+  <main class="storepage-main">
+    <section class="store-hero">
+      <div class="carousel-container" id="carouselContainer">
+        <div class="carousel-loading" id="carouselLoading">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Loading…</div>
+        </div>
+        <div class="carousel-track" id="carouselTrack">
+        </div>
+      </div>
+      <div class="carousel-indicators" id="carouselIndicators">
+      </div>
+    </section>
+
+    <section class="store-title-section">
+      <h2 id="storeName" class="store-name">Xinyi A13</h2>
+      <p class="store-location">
+        <span class="pin-icon">📍</span>
+        <span id="storeLocation">Taiwan, Taipei</span>
+      </p>
+    </section>
+
+    <section class="checkin-section">
+      <button id="btnCheckin" class="checkin-btn">
+        <span class="checkin-icon">📍</span>
+        <span class="checkin-text">Check in here</span>
+      </button>
+      <div class="checkin-success" id="checkinSuccess" style="display: none;">
+        <div class="checkin-success-row">
+          <button class="checkin-btn checkin-btn-success">
+            <span class="checkin-icon">✓</span>
+            <span class="checkin-text">Checked in</span>
+          </button>
+          <button id="btnVerifyLocation" class="verify-location-btn" style="display: none;" aria-label="Verify location">
+            <img src="./assets/icon/gpscheck.svg" alt="Verify location" class="verify-icon" />
+          </button>
+        </div>
+        <p class="checkin-date" id="checkinDate">
+          <span id="checkinDateText"></span>
+          <img id="verifiedBadge" src="./assets/icon/badge.svg" alt="Verified" class="verified-badge" style="display: none;" />
+        </p>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" style="display: none;">
+      <span id="toastMessage"></span>
+    </div>
+
+    <div class="medal-congrats-modal" id="medalCongratsModal" style="display: none;">
+      <div class="medal-congrats-backdrop"></div>
+      <div class="medal-congrats-content">
+        <h3 class="medal-congrats-title">You earned a new badge!</h3>
+        <div class="medal-congrats-medal" id="medalCongratsMedal">
+        </div>
+        <p class="medal-congrats-name" id="medalCongratsName"></p>
+        <div class="medal-congrats-actions">
+          <button class="medal-congrats-btn secondary" id="medalCongratsClose">OK</button>
+          <button class="medal-congrats-btn primary" id="medalCongratsView">View achievements</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="store-description">
+      <p id="storeDesc">Placeholder store description highlighting the space and design.</p>
+    </section>
+
+    <section class="store-contact">
+      <div class="info-row">
+        <h3 class="section-label">Phone</h3>
+        <p class="contact-phone" id="storePhone">0800-020-010</p>
+      </div>
+    </section>
+
+    <section class="store-hours-section">
+      <div class="info-row">
+        <div class="section-label-wrapper">
+          <h3 class="section-label">Hours</h3>
+          <p class="hours-note">Hours may vary. See Apple website.</p>
+        </div>
+        <div class="hours-list" id="storeHours">
+          <div class="hours-item">Mon 11:00–21:30</div>
+          <div class="hours-item">Tue 11:00–21:30</div>
+          <div class="hours-item">Wed 11:00–21:30</div>
+          <div class="hours-item">Thu 11:00–21:30</div>
+          <div class="hours-item">Fri 11:00–21:30</div>
+          <div class="hours-item">Sat 11:00–21:30</div>
+          <div class="hours-item">Sun 11:00–21:30</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-address-section">
+      <div class="info-row">
+        <h3 class="section-label">Address</h3>
+        <div class="address-content">
+          <p class="store-address" id="storeAddress">13 Songshou Rd, Xinyi District, Taipei City</p>
+          <a id="btnNavigate" class="navigate-btn" href="#" target="_blank" rel="noopener">Directions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-map-section">
+      <div class="store-map liquid-glass" id="storeMapContainer">
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/storeDetail.js"></script>
+  <script src="./js/pwa-update.js"></script>
+  <script src="./js/pwa-install.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered:', reg))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+    if (window.StoreDetailPage) {
+      window.StoreDetailPage.init();
+    }
+  </script>
+</body>
+</html>

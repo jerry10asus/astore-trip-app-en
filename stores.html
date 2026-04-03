@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AStore Trip" />
+  <title>AStore Trip - Stores</title>
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/glass.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pwa-update.css" />
+  <link rel="stylesheet" href="./css/pwa-install.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1 class="page-title">Stores</h1>
+    <div class="header-actions">
+      <button class="filter-btn" id="filterBtn" aria-label="Filter">
+        <span class="filter-text">All stores</span>
+        <img src="./assets/icon/filter.svg" alt="Filter" class="filter-icon" />
+      </button>
+      <div class="filter-dropdown" id="filterDropdown">
+        <div class="dropdown-item active" data-region="all">
+          <span>All stores</span>
+          <span class="check-icon">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="tw">
+          <span>Taiwan</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="au">
+          <span>Australia</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="at">
+          <span>Austria</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="be">
+          <span>Belgium</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="br">
+          <span>Brazil</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="ca">
+          <span>Canada</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="cn">
+          <span>Mainland China</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="fr">
+          <span>France</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="de">
+          <span>Germany</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="hk">
+          <span>Hong Kong</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="in">
+          <span>India</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="it">
+          <span>Italy</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="jp">
+          <span>Japan</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="mo">
+          <span>Macau</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="my">
+          <span>Malaysia</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="mx">
+          <span>Mexico</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="nl">
+          <span>Netherlands</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="sg">
+          <span>Singapore</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="kr">
+          <span>South Korea</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="es">
+          <span>Spain</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="se">
+          <span>Sweden</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="ch">
+          <span>Switzerland</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="th">
+          <span>Thailand</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="tr">
+          <span>Turkey</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="ae">
+          <span>United Arab Emirates</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="us">
+          <span>United States</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+        <div class="dropdown-item" data-region="gb">
+          <span>United Kingdom</span>
+          <span class="check-icon" style="display: none;">✓</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="stores-main">
+    <div class="search-container">
+      <div class="search-bar liquid-glass">
+        <img src="./assets/icon/search.svg" alt="Search" class="search-icon" />
+        <input 
+          type="text" 
+          id="storeSearch" 
+          class="search-input" 
+          placeholder="Search store or city"
+        />
+      </div>
+    </div>
+
+    <div class="stores-list-container">
+      <div class="stores-loading" id="storesLoading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading…</div>
+      </div>
+      <div class="stores-list" id="storesList" style="display: none;">
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav liquid-glass">
+    <a href="./index.html" class="nav-item">
+      <span class="nav-icon"><img src="./assets/icon/home.svg" alt="Home" /></span>
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="./stores.html" class="nav-item active">
+      <span class="nav-icon"><img src="./assets/icon/apple.svg" alt="Stores" /></span>
+      <span class="nav-label">Stores</span>
+    </a>
+    <a href="./favorites.html" class="nav-item">
+      <span class="nav-icon"><img src="./assets/icon/favorites.svg" alt="Favorites" /></span>
+      <span class="nav-label">Favorites</span>
+    </a>
+  </nav>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/stores.js"></script>
+  <script src="./js/pwa-update.js"></script>
+  <script src="./js/pwa-install.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (window.StoresPage) {
+        await window.StoresPage.init();
+      }
+    });
+
+    const filterBtn = document.getElementById('filterBtn');
+    const filterDropdown = document.getElementById('filterDropdown');
+    const filterText = filterBtn.querySelector('.filter-text');
+
+    filterBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      filterDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!filterBtn.contains(e.target) && !filterDropdown.contains(e.target)) {
+        filterDropdown.classList.remove('show');
+      }
+    });
+
+    const dropdownItems = filterDropdown.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        dropdownItems.forEach(i => {
+          i.classList.remove('active');
+          const checkIcon = i.querySelector('.check-icon');
+          if (checkIcon) checkIcon.style.display = 'none';
+        });
+        
+        item.classList.add('active');
+        const checkIcon = item.querySelector('.check-icon');
+        if (checkIcon) checkIcon.style.display = 'inline';
+        
+        const region = item.getAttribute('data-region');
+        const itemText = item.querySelector('span:first-child').textContent.trim();
+        filterText.textContent = itemText;
+        filterDropdown.classList.remove('show');
+        
+        if (window.StoresPage && window.StoresPage.filterByRegion) {
+          window.StoresPage.filterByRegion(region);
+        }
+      });
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered:', reg))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AStore Trip" />
+  <title>AStore Trip - Home</title>
+  <link rel="icon" type="image/png" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/glass.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pwa-update.css" />
+  <link rel="stylesheet" href="./css/pwa-install.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="page-header">
+    <h1 class="page-title">Home</h1>
+    <a href="./about.html" class="info-btn" aria-label="About">
+      <img src="./assets/icon/info.svg" alt="About" class="info-icon" />
+    </a>
+  </header>
+
+  <main class="home-main">
+    <!-- Achievement card -->
+    <section class="achievement-card liquid-glass" onclick="openAchievementsSheet()">
+      <div class="achievement-header">
+        <span class="achievement-label">Achievements</span>
+        <img src="./assets/icon/arrow_right.svg" alt="Go" class="achievement-arrow" />
+      </div>
+      <div class="achievement-stats">
+        <span>Visited <span class="highlight-blue" id="visitedCount">3</span> stores · earned <span class="highlight-orange" id="badgeCount">2</span> badges</span>
+      </div>
+    </section>
+
+    <!-- Classic product showcase -->
+    <section class="product-showcase" style="display: none;">
+      <div class="product-image-wrapper">
+        <img id="productImage" src="./assets/placeholders/imac-1998.png" alt="Product" class="product-image" />
+      </div>
+      <div class="product-info">
+        <div id="productYear" class="product-year">1998</div>
+        <div id="productName" class="product-name">iMac</div>
+      </div>
+    </section>
+
+    <!-- Nearest Apple Store -->
+    <section class="nearest-store-card liquid-glass">
+      <div class="nearest-store-header">
+        <div>
+          <h3 class="nearest-store-title">Nearest Apple Store</h3>
+          <p class="nearest-store-subtitle">Xinyi A13</p>
+        </div>
+        <button class="go-btn">Go</button>
+      </div>
+      <div class="store-map-container">
+        <div class="store-map liquid-glass" id="nearestStoreMapContainer">
+          <!-- Google Map iframe injected by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured stores -->
+    <section class="featured-stores">
+      <h3 class="featured-stores-title">Featured stores</h3>
+      <div class="featured-stores-scroll" id="featuredList">
+        <div class="featured-store-card">
+          <img src="./assets/placeholders/store-1.jpg" alt="Xinyi A13" />
+          <div class="featured-store-info">
+            <h4>Xinyi A13</h4>
+            <p><span class="pin-icon">📍</span> Taiwan</p>
+          </div>
+        </div>
+        <div class="featured-store-card">
+          <img src="assets/placeholders/store-1.jpg" alt="Fukuoka" />
+          <div class="featured-store-info">
+            <h4>Fukuoka</h4>
+            <p><span class="pin-icon">📍</span> Japan</p>
+          </div>
+        </div>
+        <div class="featured-store-card">
+          <img src="assets/placeholders/store-1.jpg" alt="Omotesando" />
+          <div class="featured-store-info">
+            <h4>Omotesando</h4>
+            <p><span class="pin-icon">📍</span> Japan</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav liquid-glass">
+    <a href="./index.html" class="nav-item active">
+      <span class="nav-icon"><img src="./assets/icon/home.svg" alt="Home" /></span>
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="./stores.html" class="nav-item">
+      <span class="nav-icon"><img src="./assets/icon/apple.svg" alt="Stores" /></span>
+      <span class="nav-label">Stores</span>
+    </a>
+    <a href="./favorites.html" class="nav-item">
+      <span class="nav-icon"><img src="./assets/icon/favorites.svg" alt="Favorites" /></span>
+      <span class="nav-label">Favorites</span>
+    </a>
+  </nav>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/pwa-update.js"></script>
+  <script src="./js/pwa-install.js"></script>
+  <script>
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered:', reg))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+    function openAchievementsSheet() {
+      window.location.href = './achievements.html';
+    }
+  </script>
+</body>
+</html>

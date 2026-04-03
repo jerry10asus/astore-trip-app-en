@@ -1,0 +1,1963 @@
+.header {
+  text-align: center;
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+}
+
+/* 狀態列 */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.status-icons {
+  display: flex;
+  gap: 4px;
+}
+
+.status-icon {
+  font-size: 12px;
+}
+
+/* 頁面 Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  margin-bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  z-index: 200;
+  /* 移除陰影 */
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.info-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.info-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.info-btn:hover::before {
+  left: 100%;
+}
+
+.info-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.info-icon img,
+.info-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chevron {
+  font-size: 20px;
+  color: #999;
+  font-weight: 300;
+}
+
+/* 高亮藍色 */
+.highlight-blue {
+  color: #007AFF;
+  font-weight: 600;
+}
+
+/* 首頁主內容 */
+.home-main {
+  padding: 0 16px 20px;
+  padding-top: 76px; /* Header 高度約 56px + 12px 間距 + 8px 額外間距 */
+}
+
+/* 成就卡片 */
+.achievement-card {
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.achievement-card:active {
+  transform: scale(0.98);
+}
+
+.achievement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.achievement-label {
+  font-size: 18px;
+  color: #000;
+  font-weight: 700;
+}
+
+.achievement-arrow {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.achievement-stats {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 經典產品展示 */
+.product-showcase {
+  width: calc(100% + 32px); /* 突破父容器的左右padding，实现满版 */
+  margin: 8px -16px 20px -16px; /* 负margin抵消父容器的padding，实现满版 */
+  position: relative;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.product-info {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+}
+
+.product-year {
+  font-size: 16px;
+  color: #999;
+  font-weight: 400;
+}
+
+.product-name {
+  font-size: 20px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 最近的Apple Store卡片 */
+.nearest-store-card {
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.nearest-store-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.nearest-store-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.nearest-store-subtitle {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+.go-btn {
+  background: #007AFF;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.go-btn:hover {
+  background: #0056CC;
+}
+
+.go-btn:active {
+  transform: scale(0.95);
+}
+
+/* 地圖容器 */
+.store-map-container {
+  margin-top: 12px;
+}
+
+.store-map {
+  position: relative;
+  min-height: 200px;
+  background: linear-gradient(135deg, #e8f0f6 0%, #d4e4f0 100%);
+  border-radius: 16px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.store-map-container .store-map {
+  padding: 0;
+  min-height: 200px;
+}
+
+.store-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  border: none;
+  border-radius: 12px;
+  display: block;
+}
+
+.store-map-container .store-map iframe {
+  border-radius: 16px;
+  min-height: 200px;
+  height: 200px;
+}
+
+.map-pin {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  z-index: 2;
+}
+
+.map-info-bubble {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  min-width: 240px;
+  max-width: 90%;
+}
+
+.map-info-bubble h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #000;
+}
+
+.map-address {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.map-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.rating-stars {
+  color: #FFD700;
+  font-size: 12px;
+}
+
+.rating-score {
+  font-weight: 600;
+  color: #000;
+}
+
+.rating-reviews {
+  color: #666;
+}
+
+.map-detail-link {
+  color: #007AFF;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.map-detail-link:hover {
+  text-decoration: underline;
+}
+
+.map-landmarks {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+.landmark {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+/* 精選門市 */
+.featured-stores {
+  margin-bottom: 40px; /* 增加底部间距，确保卡片阴影有空间展示 */
+}
+
+.featured-stores-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 12px 0;
+  padding: 0 4px;
+}
+
+.featured-stores-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 0 4px 16px 4px; /* 增加底部padding，确保卡片阴影有空间展示 */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  align-items: center; /* 上下置中 */
+  min-height: 240px; /* 设置最小高度，确保有足够空间 */
+}
+
+.featured-stores-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-store-card {
+  min-width: 280px;
+  max-width: calc(100vw - 96px); /* 确保右侧能看到部分下一张卡片（左右padding 16px + gap 16px + 右侧露出部分） */
+  width: calc(100vw - 96px); /* 在手机上使用视口宽度，确保右侧能看到下一张卡片 */
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 已打卡成功角标 */
+.checkin-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 40px 0 0;
+  border-color: #34C759 transparent transparent transparent;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.checkin-badge-icon {
+  position: absolute;
+  top: -36px;
+  left: 4px;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+}
+
+/* 在桌面端使用固定宽度 */
+@media (min-width: 768px) {
+  .featured-store-card {
+    width: 280px;
+    max-width: 280px;
+  }
+}
+
+.featured-store-card:active {
+  transform: scale(0.98);
+}
+
+.featured-store-card img {
+  width: 100%;
+  max-width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  display: block;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.featured-store-info {
+  padding: 12px 16px;
+  position: relative;
+}
+
+.featured-store-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.featured-store-info p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pin-icon {
+  font-size: 12px;
+}
+
+/* 底部導覽列 */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 8px;
+  z-index: 100;
+  border-radius: 999px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: #000;
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-item.active {
+  background: #E3E3E3;
+  color: #000;
+}
+
+.nav-item.active .nav-icon img,
+.nav-item.active .nav-icon svg {
+  filter: none;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon img,
+.nav-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.store-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 門市頁面主內容 */
+.stores-main {
+  padding: 0 16px 20px;
+  padding-bottom: 100px;
+  /* Header 高度約 56px + 搜尋欄高度約 72px (12px*2 padding + 48px search-bar) + 8px 額外間距 = 約 136px */
+  padding-top: 136px;
+}
+
+/* Header 操作按鈕 */
+.header-actions {
+  position: relative;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.filter-btn:hover::before {
+  left: 100%;
+}
+
+.filter-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.filter-icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* 篩選下拉選單 */
+.filter-dropdown {
+  position: fixed;
+  top: 56px; /* 從 header 下方開始，與搜尋欄重疊 */
+  right: 20px; /* 與 header 的 padding 對齊 */
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  max-height: 300px;
+  padding: 8px;
+  z-index: 300; /* 高於搜尋欄 (150) 和 header (200)，確保顯示在最上層 */
+  display: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.filter-dropdown.show {
+  display: block;
+  z-index: 300; /* 確保 show 狀態時也有正確的 z-index */
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 15px;
+  color: #333;
+}
+
+.dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-item.active {
+  background: rgba(0, 122, 255, 0.1);
+  color: #007AFF;
+}
+
+.check-icon {
+  color: #007AFF;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* 搜尋欄 */
+.search-container {
+  margin-bottom: 0;
+  position: fixed;
+  top: 56px; /* Header 高度約 56px */
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: #ffffff;
+  z-index: 150; /* 低於下拉選單的 z-index (300) */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  display: block;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  color: #333;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.mic-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mic-icon {
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+/* 商店列表容器 */
+.stores-list-container {
+  margin-bottom: 20px;
+  position: relative;
+  min-height: 200px;
+  z-index: 1; /* 確保低於 header 和搜尋欄 */
+}
+
+/* 門市列表 Loading 狀態 */
+.stores-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.stores-loading.hidden {
+  display: none;
+}
+
+.stores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 商店列表 - 垂直排列，與精選門市樣式一致 */
+.stores-list .store-card,
+.stores-list .featured-store-card {
+  min-width: auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* 商店卡片 - 與精選門市樣式一致 */
+.store-card {
+  min-width: 280px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  z-index: 1; /* 確保低於 header 和搜尋欄 */
+}
+
+.store-card .checkin-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 40px 0 0;
+  border-color: #34C759 transparent transparent transparent;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.store-card .checkin-badge-icon {
+  position: absolute;
+  top: -36px;
+  left: 4px;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+}
+
+.store-card:active {
+  transform: scale(0.98);
+}
+
+.store-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+
+.store-card__body {
+  padding: 12px 16px;
+  position: relative;
+}
+
+.store-card__body h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.store-card__body p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-fav {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+  padding: 0;
+}
+
+.btn-fav:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.fav-icon {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.2s;
+}
+
+/* 未收藏 - 黑色 */
+.btn-fav:not([aria-pressed="true"]) .fav-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+/* 已收藏 - 蓝色 #0088FF */
+.btn-fav[aria-pressed="true"] .fav-icon {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(100%) saturate(2476%) hue-rotate(200deg) brightness(101%) contrast(101%);
+}
+
+.featured-store-card .btn-fav {
+  top: 12px;
+  right: 12px;
+}
+
+.favorites-grid .featured-store-card .btn-fav {
+  top: 12px;
+  right: 12px;
+}
+
+/* 收藏頁面主內容 */
+.favorites-main {
+  padding: 0 16px 20px;
+  padding-bottom: 100px;
+  padding-top: 76px; /* Header 高度約 56px + 12px 間距 + 8px 額外間距 */
+}
+
+/* 收藏門市網格布局 - 兩列 */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.favorites-grid .featured-store-card {
+  min-width: auto;
+  width: 100%;
+}
+
+/* 門市詳情頁面 */
+.storepage-main {
+  padding-bottom: 40px;
+}
+
+
+/* Store Header - 透明效果，覆盖在图片上 */
+.store-header {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  z-index: 200;
+  background: transparent;
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.back-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.back-btn:hover::before {
+  left: 100%;
+}
+
+.back-icon {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.favorite-header-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.favorite-header-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.favorite-header-btn:hover::before {
+  left: 100%;
+}
+
+.favorite-header-btn.active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.favorite-icon {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.favorite-header-btn.active .favorite-icon {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(7151%) hue-rotate(331deg) brightness(99%) contrast(96%);
+}
+
+/* Hero 圖片輪播 */
+.store-hero {
+  width: 100%;
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-container {
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* 防止影响页面滚动 */
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+  /* 确保指示器相对于此容器定位 */
+  isolation: isolate;
+}
+
+/* 圖片區域 Loading 遮罩 */
+.carousel-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel-loading.hidden {
+  display: none;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  height: 300px;
+  /* 确保不会影响页面布局 */
+  position: relative;
+}
+
+.carousel-slide {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 300px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  /* 防止图片被拉伸 */
+  object-position: center;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  pointer-events: none;
+  /* 确保指示器不随滚动移动，相对于 store-hero 定位 */
+  width: auto;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+  pointer-events: auto;
+}
+
+.carousel-indicator.active {
+  background: rgba(255, 255, 255, 1);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* 打卡按鈕區域 */
+.checkin-section {
+  padding: 0 16px 20px;
+  background: #ffffff;
+}
+
+.checkin-btn {
+  width: 100%;
+  background: #007AFF;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.checkin-btn:hover {
+  background: #0056CC;
+}
+
+.checkin-btn:active {
+  transform: scale(0.98);
+}
+
+.checkin-btn-success {
+  background: #34C759;
+  flex: 1;
+}
+
+.checkin-btn-success:hover {
+  background: #2AA84F;
+}
+
+.checkin-icon {
+  font-size: 18px;
+}
+
+.checkin-text {
+  font-size: 16px;
+}
+
+.checkin-success {
+  text-align: center;
+}
+
+.checkin-success-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.verify-location-btn {
+  min-width: 48px;
+  height: auto;
+  min-height: 48px;
+  background: #E3E3E3;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 16px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.verify-location-btn:active {
+  transform: scale(0.95);
+  background: #D0D0D0;
+}
+
+.verify-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%);
+}
+
+.checkin-date {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.verified-badge {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(37%) sepia(100%) saturate(2476%) hue-rotate(200deg) brightness(101%) contrast(101%);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: toastSlideUp 0.3s ease-out;
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 商店標題區域 */
+.store-title-section {
+  padding: 20px 16px 16px;
+  background: #ffffff;
+}
+
+.store-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 8px 0;
+}
+
+.store-location {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 商店描述 */
+.store-description {
+  padding: 0 16px 24px;
+  background: #ffffff;
+}
+
+.store-description p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+/* 資訊行布局 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.section-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+/* 聯絡電話 */
+.store-contact {
+  padding: 0 16px 24px;
+  background: #ffffff;
+}
+
+.contact-phone {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  text-align: right;
+}
+
+/* 營業時間 */
+.store-hours-section {
+  padding: 0 16px 24px;
+  background: #ffffff;
+}
+
+.section-label-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.hours-note {
+  font-size: 12px;
+  color: #999;
+  margin: 4px 0 0 0;
+  font-weight: normal;
+}
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+}
+
+.hours-item {
+  font-size: 15px;
+  color: #333;
+  padding: 4px 0;
+}
+
+/* 門市地址 */
+.store-address-section {
+  padding: 0 16px 24px;
+  background: #ffffff;
+}
+
+.address-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+.store-address {
+  font-size: 15px;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.navigate-btn {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.navigate-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 地圖區域 */
+.store-map-section {
+  padding: 0 16px 24px;
+  background: #ffffff;
+}
+
+.store-map-section .store-map {
+  margin-top: 0;
+  padding: 0;
+  min-height: 300px;
+}
+
+.store-map-section .store-map iframe {
+  width: 100%;
+  height: 300px;
+  min-height: 300px;
+  border: none;
+  border-radius: 16px;
+  display: block;
+}
+
+/* 成就頁面 - Sheet 樣式 */
+.sheet-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sheet-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.achievement-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: #ffffff;
+  border-radius: 0;
+  height: 100%;
+  z-index: 301;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-sheet.show {
+  transform: translateY(0);
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sheet-handle {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: #d0d0d0;
+  border-radius: 2px;
+}
+
+.sheet-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.sheet-close-btn {
+  position: absolute;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sheet-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.close-icon {
+  font-size: 18px;
+  color: #333;
+  font-weight: 300;
+}
+
+.achievements-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  padding-bottom: 40px;
+}
+
+/* 成就統計卡片 */
+.achievement-summary {
+  margin-bottom: 24px;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.summary-card {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.summary-number-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.summary-card__number {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.summary-card__divider {
+  font-size: 24px;
+  font-weight: 400;
+  color: #999;
+}
+
+.summary-card__total {
+  font-size: 24px;
+  font-weight: 400;
+  color: #999;
+}
+
+.highlight-orange {
+  color: #FF9500;
+}
+
+.summary-card__label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* 歷史成就 */
+.historical-achievements {
+  margin-top: 24px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 16px 0;
+}
+
+.country-flags-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  position: relative;
+  min-height: 200px;
+}
+
+.medals-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0088FF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.country-flag-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.flag-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.country-flag-item.visited .flag-circle {
+  background: #0088FF;
+}
+
+/* 關於頁面 */
+.about-main {
+  padding: 0 16px 100px;
+  padding-top: 76px; /* Header 高度約 56px + 12px 間距 + 8px 額外間距 */
+  background: #ffffff;
+}
+
+.about-section {
+  margin-bottom: 32px;
+}
+
+.about-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 20px 0;
+}
+
+.about-content {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
+}
+
+.about-content p {
+  margin: 0 0 16px 0;
+}
+
+.about-features {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.about-features li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* 外部連結卡片 */
+.about-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: #000;
+  transition: all 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.link-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.link-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.link-content {
+  flex: 1;
+}
+
+.link-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+}
+
+.link-arrow {
+  font-size: 20px;
+  color: #999;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.app-version {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 12px;
+  color: #999;
+  background: #ffffff;
+}
+
+/* 恭喜獲得勳章彈窗 */
+.medal-congrats-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10002;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.medal-congrats-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.medal-congrats-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 320px;
+  width: 100%;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.medal-congrats-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  text-align: center;
+}
+
+.medal-congrats-medal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.medal-congrats-medal .flag-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0088FF;
+  overflow: hidden;
+}
+
+.medal-congrats-medal .flag-emoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.medal-congrats-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  text-align: center;
+}
+
+.medal-congrats-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.medal-congrats-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.medal-congrats-btn.primary {
+  background: #000000;
+  color: #ffffff;
+}
+
+.medal-congrats-btn.primary:hover {
+  background: #333333;
+}
+
+.medal-congrats-btn.primary:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.medal-congrats-btn.secondary {
+  background: rgba(0, 0, 0, 0.05);
+  color: #666666;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.medal-congrats-btn.secondary:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.medal-congrats-btn.secondary:active {
+  transform: scale(0.98);
+}
+
+.flag-emoji {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.country-flag-item:not(.visited) .flag-emoji {
+  filter: grayscale(100%) opacity(0.5);
+}
+
+.country-name {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}

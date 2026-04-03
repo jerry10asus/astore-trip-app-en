@@ -1,0 +1,21 @@
+{
+  "name": "AStore Trip",
+  "short_name": "AStore",
+  "description": "Explore Apple Stores, check in, collect badges, and favorite stores.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./assets/app_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
+

@@ -1,0 +1,138 @@
+/**
+ * PWA 更新提示样式
+ */
+
+.pwa-update-prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.pwa-update-prompt.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.pwa-update-content {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 24px 28px;
+  min-width: 280px;
+  max-width: 90%;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pwa-update-message {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.pwa-update-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.pwa-update-btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, opacity 0.2s;
+  flex: 1;
+  max-width: 140px;
+}
+
+.pwa-update-btn:hover {
+  background: #333333;
+  opacity: 0.9;
+}
+
+.pwa-update-btn:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+.pwa-update-dismiss {
+  background: transparent;
+  color: #666666;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.1s;
+  flex: 1;
+  max-width: 140px;
+}
+
+.pwa-update-dismiss:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.pwa-update-dismiss:active {
+  transform: scale(0.98);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .pwa-update-prompt {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: calc(100% - 32px);
+  }
+
+  .pwa-update-prompt.show {
+    transform: translate(-50%, -50%);
+  }
+
+  .pwa-update-content {
+    min-width: auto;
+    width: 100%;
+    padding: 20px 24px;
+  }
+
+  .pwa-update-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pwa-update-btn,
+  .pwa-update-dismiss {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
