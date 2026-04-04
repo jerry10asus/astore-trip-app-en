@@ -43,8 +43,33 @@
   }
 
   /**
+   * Referrer 來自社群／通訊（含 threads.net 任意子網域）；Threads 連結有時格式與正則不易對齊，改由 URL 解析較穩。
+   */
+  function isSocialReferrer(ref) {
+    if (!ref) return false;
+    try {
+      let host = new URL(ref).hostname.toLowerCase();
+      if (host.startsWith('www.')) host = host.slice(4);
+      const roots = [
+        'instagram.com', 'instagr.am',
+        'threads.net', 'threads.com',
+        'facebook.com', 'fb.me',
+        'twitter.com', 'x.com',
+        'tiktok.com',
+        'line.me',
+        'snapchat.com',
+        'whatsapp.com', 'wa.me'
+      ];
+      for (const root of roots) {
+        if (host === root || host.endsWith('.' + root)) return true;
+      }
+    } catch (e) { /* ignore */ }
+    return false;
+  }
+
+  /**
    * 社群／通訊 App 內建瀏覽器（無法像系統 Safari/Chrome 一樣安裝 PWA）
-   * IG/Threads 在 iOS 上常偽裝成一般 Safari UA，需搭配 referrer、WebView 特徵判斷。
+   * Threads 常在連結上加 noreferrer，referrer 為空；iOS WKWebView 常帶 Mobile/ 但沒有真 Safari 的 Version/ + Safari/ 組合。
    */
   function isSocialInAppBrowser() {
     const ua = navigator.userAgent || '';
@@ -59,18 +84,16 @@
     if (/WhatsApp/i.test(ua)) return true;
     if (/\bTwitter\b/i.test(ua)) return true;
 
-    // 從社群連結進入時，document.referrer 常可辨識（即使 UA 沒有 App 名稱）
-    const ref = document.referrer || '';
-    if (ref && /https?:\/\/([\w-]+\.)*(instagram\.com|instagr\.am|threads\.(net|com)|facebook\.com|fb\.me|l\.facebook\.com|lm\.facebook\.com|l\.instagram\.com|twitter\.com|x\.com|tiktok\.com|line\.me|snapchat\.com|whatsapp\.com|wa\.me)(\/|$)/i.test(ref)) {
-      return true;
-    }
+    if (isSocialReferrer(document.referrer || '')) return true;
 
-    // Android System WebView（多數 App 內開連結）：UA 常含 "; wv)" 或單獨的 wv 片段
     if (/android/i.test(ua) && /\bwv\b|\bwv\)/i.test(ua)) return true;
 
-    // iOS：系統 Safari UA 通常含 Version/x.x；許多 App 內 WKWebView 省略 Version 但仍有 Mobile/
     if (/(iPhone|iPad|iPod)/i.test(ua) && !/CriOS|FxiOS|EdgiOS/i.test(ua) && /AppleWebKit/i.test(ua)) {
-      if (/Mobile\//i.test(ua) && !/Version\/[\d.]+/i.test(ua)) return true;
+      const hasMobileToken = /Mobile\/[0-9A-Za-z]+/i.test(ua);
+      const hasSafariToken = /\sSafari\//i.test(ua);
+      const hasVersion = /Version\/[\d.]+/i.test(ua);
+      // 真實 iOS Safari 幾乎必備 Version/ 與 Safari/；IG/Threads 等 in-app 常缺其一（referrer 又被拿掉時就靠這段）
+      if (hasMobileToken && (!hasSafariToken || !hasVersion)) return true;
     }
 
     return false;
